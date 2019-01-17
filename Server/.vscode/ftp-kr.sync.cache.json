@@ -1,0 +1,21 @@
+{
+  "sftp://143.248.140.106:1822@root": {
+    "root": {
+      "LaserChess": {
+        "server.js": {
+          "type": "-",
+          "size": 1799,
+          "lmtime": 0,
+          "modified": false
+        },
+        "package.json": {
+          "type": "-",
+          "size": 206,
+          "lmtime": 0,
+          "modified": false
+        }
+      }
+    }
+  },
+  "$version": 1
+}
