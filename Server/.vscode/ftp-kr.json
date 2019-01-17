@@ -1,0 +1,16 @@
+{
+    "host": "143.248.140.106",
+    "username": "root",
+    "password": "22",
+    "remotePath": "/root/LaserChess",
+    "protocol": "sftp",
+    "port": 1822,
+    "fileNameEncoding": "utf8",
+    "autoUpload": true,
+    "autoDelete": false,
+    "autoDownload": false,
+    "ignore": [
+        ".git",
+        "/.vscode"
+    ]
+}
