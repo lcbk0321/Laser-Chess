@@ -8,7 +8,7 @@ const io = require('socket.io').listen(http);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
-var port = process.end.PORT || 80;
+var port = process.env.PORT || 3000;
 var server = app.listen(port, () => {
   console.log('server is running at port: ' + port);
 });
@@ -24,6 +24,7 @@ function getMyTeamSocketId(numOfPlayer) {
 }
 
 io.on('connection', function(socket){  
+  console.log('client connected');
   // 첫번째는 대기, 두번째 들어오면 ㄱㄱ
   socket.on('newPlayer', function(){
     numOfPlayers += 1;
