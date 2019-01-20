@@ -15,13 +15,12 @@ public class PieceManager : MonoBehaviour
 
     private string[] mPieceOrder = new string[16]
     {
-        "P", "P", "P", "P", "P", "P", "L", "P",
+        "P", "P", "P", "P", "P", "P", "P", "P",
         "P", "KN", "B", "Q", "K", "B", "KN", "P"
     };
 
     private Dictionary<string, Type> mPieceLibrary = new Dictionary<string, Type>()
     {
-        {"L",  typeof(Laser)},
         {"P",  typeof(Pawn)},
         {"R",  typeof(Rook)},
         {"KN", typeof(Knight)},
@@ -62,7 +61,7 @@ public class PieceManager : MonoBehaviour
             Type pieceType = mPieceLibrary[key];
 
             //Store new piece
-            BasePiece newPiece = (BasePiece)newPieceObject.AddComponent(pieceType);
+            BasePiece newPiece = (BasePiece) newPieceObject.AddComponent(pieceType);
             newPieces.Add(newPiece);
 
             //Setup piece

@@ -71,7 +71,7 @@ public class Board : MonoBehaviour
         if(targetCell.mCurrentPiece != null)
         {
             //if friendly
-            if(checkingPiece.mColor == targetCell.mCurrentPiece.mColor)
+            if (checkingPiece.mColor == targetCell.mCurrentPiece.mColor)
             {
                 return CellState.Friendly;
             }
