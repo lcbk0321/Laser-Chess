@@ -1,24 +1,21 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Laser : MonoBehaviour
+public class Laser : BasePiece
 {
-    public Image mLaserImage;
-
-    [HideInInspector]
-    public int mOnTwoCells;
-    [HideInInspector]
-    public int mWhichLine;
-    [HideInInspector]
-    public int mZeroIfHorizontal;
-
-    public void Setup(int onTwoCells, int whichLine, int zeroIfHorizontal)
+    public override void Setup(Color newTeamColor, PieceManager newPieceManager)
     {
-        mOnTwoCells = onTwoCells;
-        mWhichLine = whichLine;
-        mZeroIfHorizontal = zeroIfHorizontal;
+        base.Setup(newTeamColor, newPieceManager);
 
-        // mLaserImage.enabled = false;
+        type = "laser";
+
+        if (newTeamColor == Color.black)
+        {
+            GetComponent<Image>().sprite = Resources.Load<Sprite>("laser_B");
+        }
+        else
+        {
+            GetComponent<Image>().sprite = Resources.Load<Sprite>("laser_R");
+        }
     }
-
 }

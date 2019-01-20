@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4423409130811158950}
   - component: {fileID: 7781106807258206559}
   m_Layer: 0
-  m_Name: Laser
+  m_Name: LaserBeam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3519650152127897549}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c1c0e5270c99a49995fd93a05acb6d, type: 3}
+  m_Script: {fileID: 11500000, guid: 4fc9c779ccedc044c9654caa07fe5e05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   mLaserImage: {fileID: 6047997637350005394}

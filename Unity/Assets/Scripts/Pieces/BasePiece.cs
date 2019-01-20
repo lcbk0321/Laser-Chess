@@ -239,13 +239,13 @@ public abstract class BasePiece : EventTrigger
         mPieceManager.SwitchSides(mColor);
         ClearCells();
         HideArrow();
-        return;
 
         Vector2Int startpoint = new Vector2Int(mCurrentCell.mBoardPosition.x, mCurrentCell.mBoardPosition.y);
         Vector2Int direction = new Vector2Int(0, 1);
 
         // shoot the laser
         ShootLaser(startpoint, direction);
+        return;
     }
 
 
