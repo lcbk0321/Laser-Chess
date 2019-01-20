@@ -174,7 +174,7 @@ Camera:
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
+  orthographic: 1
   orthographic size: 5
   m_Depth: -1
   m_CullingMask:
@@ -336,7 +336,7 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
+  m_ForceModuleActive: 1
 --- !u!114 &694242542
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -571,6 +571,11 @@ PrefabInstance:
       propertyPath: m_OverridePixelPerfect
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 223547000683386380, guid: 2e179b19c3bf9c244900e9c874d72bd5,
+        type: 3}
+      propertyPath: m_OverrideSorting
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e179b19c3bf9c244900e9c874d72bd5, type: 3}
 --- !u!1001 &1816362477
@@ -707,7 +712,12 @@ PrefabInstance:
     - target: {fileID: 223675758632795112, guid: 54ca9e7c26a99fa44a35d35c9357f73d,
         type: 3}
       propertyPath: m_OverrideSorting
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 223675758632795112, guid: 54ca9e7c26a99fa44a35d35c9357f73d,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114046379163009272, guid: 54ca9e7c26a99fa44a35d35c9357f73d,
         type: 3}
