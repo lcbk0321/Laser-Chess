@@ -28,16 +28,16 @@ public class rotationLeft : MonoBehaviour
     public void Click()
     {
 
-
         foreach (Cell cell in currentpiece.mHighlightedCells)
         {
             cell.mOutlineImage.enabled = false;
         }
 
         Debug.Log("Click");
-        currentpiece.transform.rotation = Quaternion.AngleAxis(-90, Vector3.forward);
+        currentpiece.transform.Rotate(0.0f, 0.0f, 90.0f);
         right.enabled = false;
         left.enabled = false;
+        currentpiece.mPieceManager.SwitchSides(currentpiece.mColor);
     }
 
 }

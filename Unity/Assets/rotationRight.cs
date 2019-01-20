@@ -14,6 +14,7 @@ public class rotationRight : MonoBehaviour
     void Start()
     {
         currentpiece = ParentGameObject.GetComponent<Cell>().mCurrentPiece;
+        
         right = ParentGameObject.GetComponent<Cell>().mRotationImageRight;
         left = ParentGameObject.GetComponent<Cell>().mRotationImageLeft;
     }
@@ -32,10 +33,10 @@ public class rotationRight : MonoBehaviour
         {
             cell.mOutlineImage.enabled = false;
         }
-        
-        currentpiece.transform.rotation = Quaternion.AngleAxis(90, Vector3.forward);
+        currentpiece.transform.Rotate(0.0f, 0.0f, -90.0f);
         right.enabled = false;
         left.enabled = false;
+        currentpiece.mPieceManager.SwitchSides(currentpiece.mColor);
     }
 }
 

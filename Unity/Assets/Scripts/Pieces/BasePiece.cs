@@ -8,26 +8,26 @@ public abstract class BasePiece : EventTrigger
     [HideInInspector]
     public Color mColor = Color.clear;
     public bool mIsFirstMove = true;
-    public string type = null;
+    //public string type = null;
     public string direction = null;
+    public string type = null;
 
     protected Cell mOriginalCell = null;
     protected Cell mCurrentCell = null;
 
     protected RectTransform mRectTransform = null;
-    protected PieceManager mPieceManager;
+    public PieceManager mPieceManager;
 
     protected Cell mTargetCell = null;
 
     protected Vector3Int mMovement = Vector3Int.one;
     public List<Cell> mHighlightedCells = new List<Cell>();
 
-    public void Setup(Color newTeamColor, Color32 newSpriteColor, PieceManager newPieceManager)
+    public virtual void Setup(Color newTeamColor, PieceManager newPieceManager)
     {
  
         mPieceManager = newPieceManager;
         mColor = newTeamColor;
-        GetComponent<Image>().color = newSpriteColor;
         mRectTransform = GetComponent<RectTransform>();
     }
 
