@@ -22,9 +22,7 @@ public abstract class BasePiece : EventTrigger
 
     public void Setup(Color newTeamColor, Color32 newSpriteColor, PieceManager newPieceManager)
     {
-
         mPieceManager = newPieceManager;
-
         mColor = newTeamColor;
         GetComponent<Image>().color = newSpriteColor;
         mRectTransform = GetComponent<RectTransform>();
@@ -39,6 +37,7 @@ public abstract class BasePiece : EventTrigger
 
         //Object stuff
         transform.position = newCell.transform.position;
+        Debug.Log("Place function in BasePiece: " + transform.position);
         
         Debug.Log(transform.position.x+", "+ transform.position.y);
 
@@ -145,6 +144,7 @@ public abstract class BasePiece : EventTrigger
 
         //Move on board
         transform.position = mCurrentCell.transform.position;
+        Debug.Log("Move on board: " + transform.position);
         mTargetCell = null;
 
     }

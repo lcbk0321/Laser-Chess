@@ -15,12 +15,13 @@ public class PieceManager : MonoBehaviour
 
     private string[] mPieceOrder = new string[16]
     {
-        "P", "P", "P", "P", "P", "P", "P", "P",
+        "P", "P", "P", "P", "P", "P", "L", "P",
         "P", "KN", "B", "Q", "K", "B", "KN", "P"
     };
 
     private Dictionary<string, Type> mPieceLibrary = new Dictionary<string, Type>()
     {
+        {"L",  typeof(Laser)},
         {"P",  typeof(Pawn)},
         {"R",  typeof(Rook)},
         {"KN", typeof(Knight)},
@@ -40,7 +41,6 @@ public class PieceManager : MonoBehaviour
 
         //White goes first
         SwitchSides(Color.black);
-
     }
 
     private List<BasePiece> CreatePieces(Color teamColor, Color32 spriteColor, Board board)
@@ -56,13 +56,12 @@ public class PieceManager : MonoBehaviour
             //Set scale and position
             newPieceObject.transform.localScale = new Vector3(1, 1, 1);
             newPieceObject.transform.localRotation = Quaternion.identity;
-            
 
             //Get the type, apply to new object
             string key = mPieceOrder[i];
             Type pieceType = mPieceLibrary[key];
 
-            //Stroe new piece
+            //Store new piece
             BasePiece newPiece = (BasePiece)newPieceObject.AddComponent(pieceType);
             newPieces.Add(newPiece);
 
@@ -131,11 +130,5 @@ public class PieceManager : MonoBehaviour
         {
             piece.Reset();
         }
-
-    }
-
-    public void PromotePiece(Pawn pawn, Cell cell, Color teamColor, Color spriteColor)
-    {
-
     }
 }
