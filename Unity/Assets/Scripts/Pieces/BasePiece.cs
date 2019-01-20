@@ -14,23 +14,25 @@ public abstract class BasePiece : EventTrigger
     [HideInInspector]
     public Color mColor = Color.clear;
     public bool mIsFirstMove = true;
+    //public string type = null;
+    public string direction = null;
+    public string type = null;
 
     protected Cell mOriginalCell = null;
     protected Cell mCurrentCell = null;
 
     protected RectTransform mRectTransform = null;
-    protected PieceManager mPieceManager;
+    public PieceManager mPieceManager;
 
     protected Cell mTargetCell = null;
 
     protected Vector3Int mMovement = Vector3Int.one;
-    protected List<Cell> mHighlightedCells = new List<Cell>();
+    public List<Cell> mHighlightedCells = new List<Cell>();
 
-    public void Setup(Color newTeamColor, Color32 newSpriteColor, PieceManager newPieceManager)
+    public virtual void Setup(Color newTeamColor, PieceManager newPieceManager)
     {
         mPieceManager = newPieceManager;
         mColor = newTeamColor;
-        GetComponent<Image>().color = newSpriteColor;
         mRectTransform = GetComponent<RectTransform>();
     }
 
@@ -131,7 +133,7 @@ public abstract class BasePiece : EventTrigger
         {
             cell.mOutlineImage.enabled = false;
         }
-
+        HideArrow();
         mHighlightedCells.Clear();
     }
 
@@ -154,22 +156,47 @@ public abstract class BasePiece : EventTrigger
     }
     #endregion
 
+    #region Rotation
+
+    protected void ShowArrow()
+    {
+        mCurrentCell.mRotationImageRight.enabled = true;
+        mCurrentCell.mRotationImageLeft.enabled = true;
+    }
+
+    protected void HideArrow()
+    {
+        mCurrentCell.mRotationImageRight.enabled = false;
+        mCurrentCell.mRotationImageLeft.enabled = false;
+    }
+
+    public void RightRotation()
+    {
+        mCurrentCell.mCurrentPiece.transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
+    }
+
+    public void  LeftRotation()
+    {
+        mCurrentCell.mCurrentPiece.transform.rotation = Quaternion.AngleAxis(-90, Vector3.up);
+    }
+    #endregion
+
     #region Events
     public override void OnPointerClick(PointerEventData eventData)
     {
         base.OnPointerClick(eventData);
 
+        CheckPathing();
 
+        ShowCells();
+
+        ShowArrow();
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
     {
         base.OnBeginDrag(eventData);
-
-
-        CheckPathing();
-
-        ShowCells();
+        HideArrow();
     }
 
     public override void OnDrag(PointerEventData eventData)
@@ -203,6 +230,7 @@ public abstract class BasePiece : EventTrigger
         {
             transform.position = mCurrentCell.gameObject.transform.position;
             ClearCells();
+            HideArrow();
             return;
         }
 
@@ -210,6 +238,8 @@ public abstract class BasePiece : EventTrigger
         Debug.Log(mColor);
         mPieceManager.SwitchSides(mColor);
         ClearCells();
+        HideArrow();
+        return;
 
         Vector2Int startpoint = new Vector2Int(mCurrentCell.mBoardPosition.x, mCurrentCell.mBoardPosition.y);
         Vector2Int direction = new Vector2Int(0, 1);

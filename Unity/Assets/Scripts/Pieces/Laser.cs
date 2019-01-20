@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class Laser :MonoBehaviour
+public class Laser : MonoBehaviour
 {
     public Image mLaserImage;
 

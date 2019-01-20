@@ -13,11 +13,11 @@ TagManager:
   - UI
   - 
   - 
-  - laser
+  - board
+  - piece
+  - outline
+  - UI
   - 
-  - 
-  - 
-  - Top
   - 
   - 
   - 
@@ -41,9 +41,4 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: laser
-    uniqueID: 3634040289
-    locked: 0
-  - name: Top
-    uniqueID: 2533617045
     locked: 0

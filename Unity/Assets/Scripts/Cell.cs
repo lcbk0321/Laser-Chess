@@ -4,6 +4,8 @@ using UnityEngine.UI;
 public class Cell : MonoBehaviour
 {
     public Image mOutlineImage;
+    public Image mRotationImageRight;
+    public Image mRotationImageLeft;
 
     [HideInInspector]
     public Vector2Int mBoardPosition = Vector2Int.zero;

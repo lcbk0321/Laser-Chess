@@ -11,38 +11,34 @@ public class PieceManager : MonoBehaviour
 
     private List<BasePiece> mWhitePieces = null;
     private List<BasePiece> mBlackPieces = null;
-    private List<BasePiece> mPromotedPieces = new List<BasePiece>();
 
-    private string[] mPieceOrder = new string[16]
+    private string[] mPieceOrder = new string[10]
     {
-        "P", "P", "P", "P", "P", "P", "P", "P",
-        "P", "KN", "B", "Q", "K", "B", "KN", "P"
+        "L", "S", "K", "S", "T", "T", "T","T", "SP", "T"
     };
 
     private Dictionary<string, Type> mPieceLibrary = new Dictionary<string, Type>()
     {
-        {"P",  typeof(Pawn)},
-        {"R",  typeof(Rook)},
-        {"KN", typeof(Knight)},
-        {"B",  typeof(Bishop)},
-        {"K",  typeof(King)},
-        {"Q",  typeof(Queen)}
+        {"SP",  typeof(Splitter)},
+        {"S",  typeof(Square)},
+        {"T",  typeof(Triangle)},
+        {"L",  typeof(Laser)},
+        {"K",  typeof(King)}
     };
 
     public void Setup(Board board)
     {
-        mWhitePieces = CreatePieces(Color.white, new Color32(80, 124, 159, 255), board);
+        mWhitePieces = CreatePieces(Color.white, board);
 
-        mBlackPieces = CreatePieces(Color.black, new Color32(210, 95, 64, 255), board);
+        mBlackPieces = CreatePieces(Color.black, board);
 
-        PlacePieces(1, 0, mWhitePieces, board);
-        PlacePieces(6, 7, mBlackPieces, board);
+        PlacePieces(mWhitePieces, mBlackPieces, board);
 
         //White goes first
         SwitchSides(Color.black);
     }
 
-    private List<BasePiece> CreatePieces(Color teamColor, Color32 spriteColor, Board board)
+    private List<BasePiece> CreatePieces(Color teamColor, Board board)
     {
         List<BasePiece> newPieces = new List<BasePiece> ();
 
@@ -65,7 +61,7 @@ public class PieceManager : MonoBehaviour
             newPieces.Add(newPiece);
 
             //Setup piece
-            newPiece.Setup(teamColor, spriteColor, this);
+            newPiece.Setup(teamColor, this);
         }
         return newPieces;
     }
@@ -75,16 +71,34 @@ public class PieceManager : MonoBehaviour
         return null;
     }
 
-    private void PlacePieces(int pawnRow, int royaltyRow, List<BasePiece> pieces, Board board)
+    private void PlacePieces(List<BasePiece> whitepieces, List<BasePiece> blackpieces, Board board)
     {
-        for ( int i = 0; i < 8; i++)
-        {
-            //  Place pawns
-            pieces[i].Place(board.mAllCells[i, pawnRow]);
+        whitepieces[0].Place(board.mAllCells[7, 7]);
+        blackpieces[0].Place(board.mAllCells[0, 0]);
 
-            //  Place royalty
-            pieces[i+8].Place(board.mAllCells[i, royaltyRow]);
+        for (int i = 1; i < 5; i++)
+        {
+            whitepieces[i].Place(board.mAllCells[7, 6-i]);
+            blackpieces[i].Place(board.mAllCells[0, i+1]);
         }
+
+        for (int i = 5; i < 7; i++)
+        {
+            whitepieces[i].Place(board.mAllCells[4, i-2]);
+            blackpieces[i].Place(board.mAllCells[3, i-2]);
+        }
+        whitepieces[5].transform.rotation=Quaternion.AngleAxis(90, Vector3.forward);
+        blackpieces[6].transform.rotation = Quaternion.AngleAxis(90, Vector3.forward);
+        whitepieces[7].Place(board.mAllCells[3, 7]);
+        blackpieces[7].Place(board.mAllCells[4, 0]);
+        whitepieces[7].transform.rotation = Quaternion.AngleAxis(180, Vector3.forward);
+        blackpieces[7].transform.rotation = Quaternion.AngleAxis(180, Vector3.forward);
+        whitepieces[8].Place(board.mAllCells[0, 7]);
+        blackpieces[8].Place(board.mAllCells[7, 0]);
+        whitepieces[9].Place(board.mAllCells[0, 1]);
+        blackpieces[9].Place(board.mAllCells[7, 6]);
+        whitepieces[9].transform.rotation = Quaternion.AngleAxis(180, Vector3.forward);
+        blackpieces[9].transform.rotation = Quaternion.AngleAxis(180, Vector3.forward);
     }
 
     private void SetInteractive(List<BasePiece> allPieces, bool value)
