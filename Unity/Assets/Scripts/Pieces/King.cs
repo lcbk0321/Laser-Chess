@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class King : BasePiece
 {
@@ -10,13 +11,15 @@ public class King : BasePiece
 
         type = "king";
 
-        /*if (newTeamColor == Color.black)
+        if (newTeamColor == Color.black)
         {
             GetComponent<Image>().sprite = Resources.Load<Sprite>("king_B");
         }
         else
         {
             GetComponent<Image>().sprite = Resources.Load<Sprite>("king_R");
-        }*/
+        }
     }
+
+
 }

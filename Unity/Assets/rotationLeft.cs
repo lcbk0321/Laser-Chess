@@ -33,6 +33,16 @@ public class rotationLeft : MonoBehaviour
             cell.mOutlineImage.enabled = false;
         }
 
+
+        if(currentpiece.direction -1 < 0)
+        {
+            currentpiece.direction = currentpiece.direction - 1 + 4;
+        }
+        else
+        {
+            currentpiece.direction--;
+        }
+
         Debug.Log("Click");
         currentpiece.transform.Rotate(0.0f, 0.0f, 90.0f);
         right.enabled = false;

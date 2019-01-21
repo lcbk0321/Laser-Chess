@@ -6,17 +6,20 @@ using System.Collections.Generic;
 public abstract class BasePiece : EventTrigger
 {
     [HideInInspector]
+    public bool click = false;
     public Color mColor = Color.clear;
     public bool mIsFirstMove = true;
-    
-    // type and direction of pieces
+    //public string type = null;
+    private Canvas canv;
+
     public int direction = 0;
     public string type = null;
 
     protected Cell mOriginalCell = null;
+    public RectTransform mOriginalTransform = null;
     protected Cell mCurrentCell = null;
 
-    protected RectTransform mRectTransform = null;
+    public RectTransform mRectTransform = null;
     public PieceManager mPieceManager;
 
     protected Cell mTargetCell = null;
@@ -31,7 +34,7 @@ public abstract class BasePiece : EventTrigger
         mRectTransform = GetComponent<RectTransform>();
     }
 
-    public void Place(Cell newCell)
+    public void Place(Cell newCell, RectTransform originaltransform)
     {
         //Cell Stuff
         mCurrentCell = newCell;
@@ -40,6 +43,10 @@ public abstract class BasePiece : EventTrigger
 
         //Object stuff
         transform.position = newCell.transform.position;
+        if (originaltransform != null)
+        {
+            transform.rotation = originaltransform.rotation;
+        }
         Debug.Log("Place function in BasePiece: " + transform.position);
         
         Debug.Log(transform.position.x+", "+ transform.position.y);
@@ -50,7 +57,7 @@ public abstract class BasePiece : EventTrigger
     public void Reset()
     {
         Kill();
-        Place(mOriginalCell);
+        Place(mOriginalCell, mOriginalTransform);
     }
 
     public void Kill()
@@ -78,7 +85,7 @@ public abstract class BasePiece : EventTrigger
 
         if (cellState == CellState.Enemy)
         {
-            mHighlightedCells.Add(mCurrentCell.mBoard.mAllCells[currentX, currentY]);
+            //mHighlightedCells.Add(mCurrentCell.mBoard.mAllCells[currentX, currentY]);
             return;
         }
 
@@ -91,7 +98,7 @@ public abstract class BasePiece : EventTrigger
         
     }
 
-    public void CheckPathing()
+    public virtual void CheckPathing()
     {
         //Horizontal
         CreateCellPath(1, 0);
@@ -179,17 +186,42 @@ public abstract class BasePiece : EventTrigger
     {
         base.OnPointerClick(eventData);
 
-        CheckPathing();
+        if (click == false)
+        {
+            for (int i = 0; i < 8; i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    if (mCurrentCell.mBoard.mAllCells[i, j].mCurrentPiece != null)
+                    {
+                        mCurrentCell.mBoard.mAllCells[i, j].mCurrentPiece.click = false;
+                        mCurrentCell.mBoard.mAllCells[i, j].mCurrentPiece.ClearCells();
+                    }
+                }
+            }
 
-        ShowCells();
+            CheckPathing();
 
-        ShowArrow();
+            ShowCells();
+
+            ShowArrow();
+
+            click = true;
+        }
+        else
+        {
+            ClearCells();
+            click = false;
+
+        }
+
     }
 
     public override void OnBeginDrag(PointerEventData eventData)
     {
         base.OnBeginDrag(eventData);
-        HideArrow();
+
+       
     }
 
     public override void OnDrag(PointerEventData eventData)
@@ -198,7 +230,6 @@ public abstract class BasePiece : EventTrigger
         
         //Follow Pointer
         transform.position += (Vector3)eventData.delta;
-
         foreach ( Cell cell in mHighlightedCells)
         {
             if(RectTransformUtility.RectangleContainsScreenPoint(cell.mRectTransform, Input.mousePosition))
@@ -219,20 +250,19 @@ public abstract class BasePiece : EventTrigger
         Vector2Int startpoint;
         int direction;
 
+        Destroy(canv);
         //return to original position
         if (!mTargetCell)
         {
             transform.position = mCurrentCell.gameObject.transform.position;
             ClearCells();
-            HideArrow();
             return;
         }
 
-        Move();
-        Debug.Log(mColor);
-        mPieceManager.SwitchSides(mColor);
         ClearCells();
-        HideArrow();
+        Move();
+        mPieceManager.SwitchSides(mColor);
+        
 
         bool ifWhiteTeam = (mCurrentCell.mCurrentPiece.mColor == Color.white);
 
@@ -252,7 +282,6 @@ public abstract class BasePiece : EventTrigger
 
         // shoot the laser
         ShootLaser(startpoint, direction);
-        return;
     }
 
     // wait a second / show the laser / destroy, 
