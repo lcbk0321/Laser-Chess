@@ -297,6 +297,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   profile: {fileID: 0}
+--- !u!1 &184993555 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1757523286599228, guid: 2e179b19c3bf9c244900e9c874d72bd5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1311958483}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &618647809
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,7 +516,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1311958483}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 184993555}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf7f5f6bb0170804bbc4905eeb82bd11, type: 3}
@@ -816,6 +822,11 @@ PrefabInstance:
       propertyPath: mturn
       value: 
       objectReference: {fileID: 126257607}
+    - target: {fileID: 114283005606547992, guid: 54ca9e7c26a99fa44a35d35c9357f73d,
+        type: 3}
+      propertyPath: mBBoard
+      value: 
+      objectReference: {fileID: 184993555}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54ca9e7c26a99fa44a35d35c9357f73d, type: 3}
 --- !u!114 &1816362478 stripped
@@ -943,7 +954,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1816362478}
-          m_MethodName: ResetPieces
+          m_MethodName: Reset
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
