@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
         mBoard.Create();
 
         //  create lasers
-        mLaserManager.Setup();
+        mLaserManager.Setup(mBoard);
 
         //  create pieces
         mPieceManager.Setup(mBoard);

@@ -19,6 +19,9 @@ public class Board : MonoBehaviour
     [HideInInspector]
     public Cell[,] mAllCells = new Cell[8, 8];
 
+    [HideInInspector]
+    public LaserBeam[,,] mAllLaserBeams = new LaserBeam[7, 8, 2];
+
     public void Create()
     {
         for (int y = 0; y < 8; y++)
@@ -34,7 +37,7 @@ public class Board : MonoBehaviour
 
                 //  Setup
                 mAllCells[x, y] = newCell.GetComponent<Cell>();
-                mAllCells[x, y].Setup(new Vector2Int(x, y), this); 
+                mAllCells[x, y].Setup(new Vector2Int(x, y), this);
             }
         }
 
@@ -80,6 +83,30 @@ public class Board : MonoBehaviour
             {
                 return CellState.Enemy;
             }
+        }
+
+        return CellState.Free;
+    }
+
+    public CellState ValidateLaser(int targetX, int targetY)
+    {
+        //bounds check
+        if (targetX < 0 || targetX > 7)
+        {
+            return CellState.OutOfBounds;
+        }
+
+        if (targetY < 0 || targetY > 7)
+        {
+            return CellState.OutOfBounds;
+        }
+
+        Cell targetCell = mAllCells[targetX, targetY];
+
+        //if the cell has a peice
+        if (targetCell.mCurrentPiece != null)
+        {
+            return CellState.Friendly;
         }
 
         return CellState.Free;

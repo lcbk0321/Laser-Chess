@@ -18,4 +18,6 @@ public class Laser : BasePiece
             GetComponent<Image>().sprite = Resources.Load<Sprite>("laser_R");
         }
     }
+
+
 }

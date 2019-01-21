@@ -18,7 +18,17 @@ public class LaserBeam : MonoBehaviour
         mWhichLine = whichLine;
         mZeroIfHorizontal = zeroIfHorizontal;
 
-        // mLaserImage.enabled = false;
+        mLaserImage.enabled = false;
+    }
+
+    public void EnableLaser()
+    {
+        mLaserImage.enabled = true;
+    }
+
+    public void DisableLaser()
+    {
+        mLaserImage.enabled = false;
     }
 
 }
