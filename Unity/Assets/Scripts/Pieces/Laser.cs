@@ -11,11 +11,14 @@ public class Laser : BasePiece
 
         if (newTeamColor == Color.black)
         {
-            GetComponent<Image>().sprite = Resources.Load<Sprite>("laser_B");
+            GetComponent<Image>().sprite = Resources.Load<Sprite>("laser__B");
         }
         else
         {
-            GetComponent<Image>().sprite = Resources.Load<Sprite>("laser_R");
+            GetComponent<Image>().sprite = Resources.Load<Sprite>("laser__R");
         }
+    }
+    public override void CheckPathing()
+    {
     }
 }
