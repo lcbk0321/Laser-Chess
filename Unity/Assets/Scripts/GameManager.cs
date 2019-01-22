@@ -19,7 +19,4 @@ public class GameManager : MonoBehaviour
         mPieceManager.Setup(mBoard);
     }
 
-    public void Reset() {
-
-    }
 }
