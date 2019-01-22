@@ -13,7 +13,8 @@ public class PieceManager : MonoBehaviour
     public bool firstSetup = true;
 
     public GameObject mPiecePrefab;
-    public Text mturn;
+    public Text mRED;
+    public Text mBLUE;
     public GameObject mBBoard;
     private List<BasePiece> mWhitePieces = null;
     private List<BasePiece> mBlackPieces = null;
@@ -171,14 +172,17 @@ public class PieceManager : MonoBehaviour
         bool isBlackTurn = color == Color.white ? true : false;
         if (color == Color.black)
         {
-            mturn.text = "RED";
-            mturn.color = new Color32(210, 95, 64, 255);
-
+            mBLUE.color = new Color32(217, 212, 207, 255);
+            mBLUE.fontSize = 50;
+            mRED.fontSize = 60;
+            mRED.color = new Color32(210, 95, 64, 255);
         }
         else
         {
-            mturn.text = "BLUE";
-            mturn.color = new Color32(80, 124, 159, 255);
+            mBLUE.fontSize = 60;
+            mRED.fontSize = 50;
+            mRED.color = new Color32(217, 212, 207, 255);
+            mBLUE.color = new Color32(80, 124, 159, 255);
         }
 
         // LASER Codes //

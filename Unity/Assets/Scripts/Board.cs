@@ -50,7 +50,7 @@ public class Board : MonoBehaviour
                 int finalX = x + offset;
 
                 //color
-                mAllCells[finalX, y].GetComponent<Image>().color = new Color32(230, 220, 187, 255);
+                mAllCells[finalX, y].GetComponent<Image>().color = new Color32(217, 212, 207, 255);
             }
         }
     }
