@@ -17,7 +17,7 @@ public abstract class BasePiece : EventTrigger
 
     protected Cell mOriginalCell = null;
     public RectTransform mOriginalTransform = null;
-    protected Cell mCurrentCell = null;
+    public Cell mCurrentCell = null;
 
     public RectTransform mRectTransform = null;
     public PieceManager mPieceManager;
@@ -34,7 +34,7 @@ public abstract class BasePiece : EventTrigger
         mRectTransform = GetComponent<RectTransform>();
     }
 
-    public void Place(Cell newCell, RectTransform originaltransform)
+    public void Place(Cell newCell)
     {
         //Cell Stuff
         mCurrentCell = newCell;
@@ -43,10 +43,6 @@ public abstract class BasePiece : EventTrigger
 
         //Object stuff
         transform.position = newCell.transform.position;
-        if (originaltransform != null)
-        {
-            transform.rotation = originaltransform.rotation;
-        }
         Debug.Log("Place function in BasePiece: " + transform.position);
         
         Debug.Log(transform.position.x+", "+ transform.position.y);
@@ -57,7 +53,8 @@ public abstract class BasePiece : EventTrigger
     public void Reset()
     {
         Kill();
-        Place(mOriginalCell, mOriginalTransform);
+        Place(mOriginalCell);
+        mHighlightedCells.Clear();
     }
 
     public void Kill()
@@ -65,6 +62,7 @@ public abstract class BasePiece : EventTrigger
         mCurrentCell.mCurrentPiece = null;
 
         gameObject.SetActive(false);
+
     }
 
     #region Movement
@@ -126,9 +124,8 @@ public abstract class BasePiece : EventTrigger
 
     }
 
-    protected void ClearCells()
+    public void ClearCells()
     {
-
         foreach (Cell cell in mHighlightedCells)
         {
             cell.mOutlineImage.enabled = false;

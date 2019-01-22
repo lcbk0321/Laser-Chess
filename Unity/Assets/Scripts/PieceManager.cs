@@ -14,6 +14,7 @@ public class PieceManager : MonoBehaviour
 
     public GameObject mPiecePrefab;
     public Text mturn;
+    public GameObject mBBoard;
     private List<BasePiece> mWhitePieces = null;
     private List<BasePiece> mBlackPieces = null;
 
@@ -82,33 +83,33 @@ public class PieceManager : MonoBehaviour
 
     private void PlacePieces(List<BasePiece> whitepieces, List<BasePiece> blackpieces, Board board)
     {
-        whitepieces[0].Place(board.mAllCells[7, 7], null);
-        blackpieces[0].Place(board.mAllCells[0, 0], null);
+        whitepieces[0].Place(board.mAllCells[7, 7]);
+        blackpieces[0].Place(board.mAllCells[0, 0]);
         
 
         for (int i = 1; i < 5; i++)
         {
-            whitepieces[i].Place(board.mAllCells[7, 6-i], null);
-            blackpieces[i].Place(board.mAllCells[0, i+1], null);
+            whitepieces[i].Place(board.mAllCells[7, 6-i]);
+            blackpieces[i].Place(board.mAllCells[0, i+1]);
         }
 
         for (int i = 5; i < 7; i++)
         {
-            whitepieces[i].Place(board.mAllCells[4, i-2], null);
-            blackpieces[i].Place(board.mAllCells[3, i-2], null);
+            whitepieces[i].Place(board.mAllCells[4, i-2]);
+            blackpieces[i].Place(board.mAllCells[3, i-2]);
         }
         whitepieces[4].transform.rotation = Quaternion.AngleAxis(90, Vector3.forward);
         blackpieces[4].transform.rotation = Quaternion.AngleAxis(90, Vector3.forward);
         whitepieces[5].transform.rotation=Quaternion.AngleAxis(90, Vector3.forward);
         blackpieces[6].transform.rotation = Quaternion.AngleAxis(90, Vector3.forward);
-        whitepieces[7].Place(board.mAllCells[3, 7], null);
-        blackpieces[7].Place(board.mAllCells[4, 0], null);
+        whitepieces[7].Place(board.mAllCells[3, 7]);
+        blackpieces[7].Place(board.mAllCells[4, 0]);
         whitepieces[7].transform.rotation = Quaternion.AngleAxis(180, Vector3.forward);
         blackpieces[7].transform.rotation = Quaternion.AngleAxis(180, Vector3.forward);
-        whitepieces[8].Place(board.mAllCells[0, 7], null);
-        blackpieces[8].Place(board.mAllCells[7, 0], null);
-        whitepieces[9].Place(board.mAllCells[0, 1], null);
-        blackpieces[9].Place(board.mAllCells[7, 6], null);
+        whitepieces[8].Place(board.mAllCells[0, 7]);
+        blackpieces[8].Place(board.mAllCells[7, 0]);
+        whitepieces[9].Place(board.mAllCells[0, 1]);
+        blackpieces[9].Place(board.mAllCells[7, 6]);
         whitepieces[9].transform.rotation = Quaternion.AngleAxis(180, Vector3.forward);
         blackpieces[9].transform.rotation = Quaternion.AngleAxis(180, Vector3.forward);
 
@@ -158,7 +159,7 @@ public class PieceManager : MonoBehaviour
         if (!mIsKingAlive)
         {
             //Reset pieces
-            ResetPieces();
+            Reset();
 
             //King state is alive again
             mIsKingAlive = true;
@@ -209,20 +210,21 @@ public class PieceManager : MonoBehaviour
         firstSetup = false;
     }
 
-    public void ResetPieces()
+    public void Reset()
     {
         Debug.Log("onclick");
-        //  Reset white
-        foreach ( BasePiece piece in mWhitePieces)
+
+        foreach (BasePiece piece in mWhitePieces)
         {
-            piece.Reset();
+            piece.mCurrentCell.RemovePiece();
         }
-        
+
         //  Reset Black
         foreach (BasePiece piece in mBlackPieces)
         {
-            piece.Reset();
+            piece.mCurrentCell.RemovePiece();
         }
+        Setup(mBBoard.GetComponent<Board>());
     }
 
     // ================================================================================= //

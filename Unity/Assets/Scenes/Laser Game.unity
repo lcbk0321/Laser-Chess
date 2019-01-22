@@ -370,8 +370,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 916053869}
-  - {fileID: 1816362479}
   - {fileID: 5346363608355622633}
+  - {fileID: 1816362479}
   - {fileID: 126257609}
   - {fileID: 1874197118}
   m_Father: {fileID: 0}
@@ -510,7 +510,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1311958483}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1179577543}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cf7f5f6bb0170804bbc4905eeb82bd11, type: 3}
@@ -519,6 +519,12 @@ MonoBehaviour:
 --- !u!224 &916053869 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 224601459393929442, guid: 2e179b19c3bf9c244900e9c874d72bd5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1311958483}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1179577543 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1757523286599228, guid: 2e179b19c3bf9c244900e9c874d72bd5,
     type: 3}
   m_PrefabInstance: {fileID: 1311958483}
   m_PrefabAsset: {fileID: 0}
@@ -665,6 +671,49 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e179b19c3bf9c244900e9c874d72bd5, type: 3}
+--- !u!1 &1436744043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1436744045}
+  - component: {fileID: 1436744044}
+  m_Layer: 0
+  m_Name: back
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1436744044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436744043}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f22e470cc27d7b489e4945e5503c2df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1436744045
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1436744043}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 49.367798, y: 665.6897, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1816362477
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -714,7 +763,7 @@ PrefabInstance:
     - target: {fileID: 224387480397115876, guid: 54ca9e7c26a99fa44a35d35c9357f73d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224387480397115876, guid: 54ca9e7c26a99fa44a35d35c9357f73d,
         type: 3}
@@ -816,6 +865,16 @@ PrefabInstance:
       propertyPath: mturn
       value: 
       objectReference: {fileID: 126257607}
+    - target: {fileID: 114283005606547992, guid: 54ca9e7c26a99fa44a35d35c9357f73d,
+        type: 3}
+      propertyPath: mBoard
+      value: 
+      objectReference: {fileID: 916053867}
+    - target: {fileID: 114283005606547992, guid: 54ca9e7c26a99fa44a35d35c9357f73d,
+        type: 3}
+      propertyPath: mBBoard
+      value: 
+      objectReference: {fileID: 1179577543}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54ca9e7c26a99fa44a35d35c9357f73d, type: 3}
 --- !u!114 &1816362478 stripped
@@ -942,8 +1001,8 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1816362478}
-          m_MethodName: ResetPieces
+        - m_Target: {fileID: 1436744044}
+          m_MethodName: BBack
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1087,7 +1146,7 @@ PrefabInstance:
     - target: {fileID: 5346363608355622633, guid: dff1ceebea8233e45a6aa4e178bf97f2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5346363608355622633, guid: dff1ceebea8233e45a6aa4e178bf97f2,
         type: 3}
@@ -1154,6 +1213,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6614109479970553468, guid: dff1ceebea8233e45a6aa4e178bf97f2,
+        type: 3}
+      propertyPath: mBoard
+      value: 
+      objectReference: {fileID: 916053867}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dff1ceebea8233e45a6aa4e178bf97f2, type: 3}
 --- !u!114 &6941558234818222408 stripped

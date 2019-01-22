@@ -17,5 +17,5 @@ public class GameManager : MonoBehaviour
         //  create pieces
         mPieceManager.Setup(mBoard);
     }
-    
+
 }
