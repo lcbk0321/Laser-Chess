@@ -14,6 +14,7 @@ public class PieceManager : MonoBehaviour
 
     public GameObject mPiecePrefab;
     public Text mturn;
+    public GameOver mEndMessage;
     public GameObject mBBoard;
     private List<BasePiece> mWhitePieces = null;
     private List<BasePiece> mBlackPieces = null;
@@ -35,7 +36,8 @@ public class PieceManager : MonoBehaviour
     };
 
     public void Setup(Board board)
-    {        
+    {
+        Debug.Log("Setting up Pieces~");
         mWhitePieces = CreatePieces(Color.white, board);
 
         mBlackPieces = CreatePieces(Color.black, board);
@@ -43,7 +45,7 @@ public class PieceManager : MonoBehaviour
         PlacePieces(mWhitePieces, mBlackPieces, board);
 
         mBoard = board;
-
+        mEndMessage.Setup();
         //White goes first
         SwitchSides(Color.black);
     }
@@ -449,10 +451,6 @@ public class PieceManager : MonoBehaviour
             // ============================================= //
             mBoard.mAllCells[destroyX, destroyY].RemovePiece();
         }
-
-        //// set time out
-        //// wait a second
-        //System.Threading.Thread.Sleep(1000);
 
         // hide the laserpath
         for (int i = 0; i < 7; i++)

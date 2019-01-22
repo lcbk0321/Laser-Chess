@@ -23,13 +23,13 @@ public class LaserBeam : MonoBehaviour
 
     public void EnableLaser()
     {
-        Debug.Log("been to EnableLaser() fuction");
+        // Debug.Log("been to EnableLaser() fuction");
         mLaserImage.enabled = true;
     }
 
     public void DisableLaser()
     {
-        Debug.Log("now DisableLaser() now");
+        // Debug.Log("now DisableLaser() now");
         mLaserImage.enabled = false;
     }
 

@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public Board mBoard;
     public LaserManager mLaserManager;
     public PieceManager mPieceManager;
+    public GameOver mEndMessage;
 
     void Start()
     {
@@ -16,6 +18,9 @@ public class GameManager : MonoBehaviour
 
         //  create pieces
         mPieceManager.Setup(mBoard);
+
+        //  create message
+        // mEndMessage.Setup();
     }
 
 }

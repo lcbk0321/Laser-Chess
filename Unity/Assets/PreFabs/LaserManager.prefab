@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mLaserBeamPrefab: {fileID: 3519650152127897549, guid: 4c534b03d8e02c3408bf26834f4824a1,
     type: 3}
+  mBoard: {fileID: 114753511022822146, guid: 2e179b19c3bf9c244900e9c874d72bd5, type: 3}
 --- !u!223 &1914981390168645051
 Canvas:
   m_ObjectHideFlags: 0
