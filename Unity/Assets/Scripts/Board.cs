@@ -15,6 +15,7 @@ public enum CellState
 public class Board : MonoBehaviour
 {
     public GameObject mCellPrefab;
+    public Text mEndMessage;
 
     [HideInInspector]
     public Cell[,] mAllCells = new Cell[8, 8];

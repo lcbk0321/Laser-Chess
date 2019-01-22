@@ -27,7 +27,7 @@ public class LaserManager : MonoBehaviour
 
                 // Set laserbeam position
                 RectTransform rectTransform = newLaserBeam.GetComponent<RectTransform>();
-                rectTransform.localScale = new Vector3(1.2f, 2, 1);
+                rectTransform.localScale = new Vector3(1.1f, 2, 1);
                 rectTransform.anchoredPosition = new Vector2((x * 100 - 300), (y * 100 - 350));
 
                 // Setup 
@@ -47,7 +47,7 @@ public class LaserManager : MonoBehaviour
 
                 // Set laser position
                 RectTransform rectTransform = newLaserBeam.GetComponent<RectTransform>();
-                rectTransform.localScale = new Vector3(1.2f, 2, 1);
+                rectTransform.localScale = new Vector3(1.1f, 2, 1);
                 rectTransform.rotation = Quaternion.AngleAxis(90, Vector3.forward);
                 rectTransform.anchoredPosition = new Vector2((y * 100 - 350), (x * 100 - 300));
 

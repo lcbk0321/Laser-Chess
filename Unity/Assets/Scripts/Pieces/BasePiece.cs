@@ -9,8 +9,6 @@ public abstract class BasePiece : EventTrigger
     public bool click = false;
     public Color mColor = Color.clear;
     public bool mIsFirstMove = true;
-    //public string type = null;
-    private Canvas canv;
 
     public int direction = 0;
     public string type = null;
@@ -59,10 +57,18 @@ public abstract class BasePiece : EventTrigger
 
     public void Kill()
     {
+        if (mCurrentCell.mCurrentPiece.type == "king")
+        {
+            string winningTeam;
+            if (mColor == Color.white) winningTeam = "BLUE";
+            else winningTeam = "RED";
+
+            mCurrentCell.mBoard.mEndMessage.text = winningTeam + " has won!";
+            mCurrentCell.mBoard.mEndMessage.enabled = true;
+        }
+
         mCurrentCell.mCurrentPiece = null;
-
         gameObject.SetActive(false);
-
     }
 
     #region Movement
@@ -157,6 +163,27 @@ public abstract class BasePiece : EventTrigger
 
     protected void ShowArrow()
     {
+        BasePiece currentpiece = mCurrentCell.mCurrentPiece;
+        if ((mColor == Color.black) && (currentpiece.type == "laser") && (currentpiece.direction == 2))
+        {
+            mCurrentCell.mRotationImageLeft.enabled = true;
+            return;
+        }
+        if ((mColor == Color.black) && (currentpiece.type == "laser") && (currentpiece.direction == 1))
+        {
+            mCurrentCell.mRotationImageRight.enabled = true;
+            return;
+        }
+        if ((mColor == Color.white) && (currentpiece.type == "laser") && (currentpiece.direction == 0))
+        {
+            mCurrentCell.mRotationImageLeft.enabled = true;
+            return;
+        }
+        if ((mColor == Color.white) && (currentpiece.type == "laser") && (currentpiece.direction == 3))
+        {
+            mCurrentCell.mRotationImageRight.enabled = true;
+            return;
+        }
         mCurrentCell.mRotationImageRight.enabled = true;
         mCurrentCell.mRotationImageLeft.enabled = true;
     }
@@ -245,7 +272,6 @@ public abstract class BasePiece : EventTrigger
     {
         base.OnEndDrag(eventData);
 
-        Destroy(canv);
         //return to original position
         if (!mTargetCell)
         {
