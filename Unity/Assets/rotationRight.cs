@@ -36,7 +36,6 @@ public class rotationRight : MonoBehaviour
         {
             currentpiece.direction++;
         }
-
         currentpiece.transform.Rotate(0.0f, 0.0f, -90.0f);
         right.enabled = false;
         left.enabled = false;

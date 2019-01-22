@@ -15,6 +15,8 @@ public enum CellState
 public class Board : MonoBehaviour
 {
     public GameObject mCellPrefab;
+    public Text mEndMessage;
+    public ParticleSystem mDestructionEffect;
 
     [HideInInspector]
     public Cell[,] mAllCells = new Cell[8, 8];
@@ -103,7 +105,7 @@ public class Board : MonoBehaviour
 
         Cell targetCell = mAllCells[targetX, targetY];
 
-        //if the cell has a peice
+        //if the cell has a piece
         if (targetCell.mCurrentPiece != null)
         {
             return CellState.Friendly;

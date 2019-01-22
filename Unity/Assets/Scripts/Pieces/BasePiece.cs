@@ -10,7 +10,7 @@ public abstract class BasePiece : EventTrigger
     public Color mColor = Color.clear;
     public bool mIsFirstMove = true;
     //public string type = null;
-    private Canvas canv;
+
 
     public int direction = 0;
     public string type = null;
@@ -26,6 +26,8 @@ public abstract class BasePiece : EventTrigger
 
     protected Vector3Int mMovement = Vector3Int.one;
     public List<Cell> mHighlightedCells = new List<Cell>();
+
+    public ParticleSystem DestructionEffect;
 
     public virtual void Setup(Color newTeamColor, PieceManager newPieceManager)
     {
@@ -59,9 +61,37 @@ public abstract class BasePiece : EventTrigger
 
     public void Kill()
     {
-        mCurrentCell.mCurrentPiece = null;
+        if (mCurrentCell.mCurrentPiece.type == "king")
+        {
+            string winningTeam;
+            if (mColor == Color.white) winningTeam = "BLUE";
+            else winningTeam = "RED";
 
-        gameObject.SetActive(false);
+            mCurrentCell.mBoard.mEndMessage.text = winningTeam + " has won!";
+            mCurrentCell.mBoard.mEndMessage.enabled = true;
+        }
+
+        mCurrentCell.mCurrentPiece = null;
+        gameObject.SetActive(false);  
+        // Explode();
+    }
+
+    void Explode()
+    {
+        DestructionEffect = mCurrentCell.mBoard.mDestructionEffect;
+        //Instantiate our one-off particle system
+        ParticleSystem explosionEffect = Instantiate(DestructionEffect)
+                                         as ParticleSystem;
+        explosionEffect.transform.position = transform.position;
+        //play it
+        // explosionEffect.loop = false;
+        explosionEffect.Play();
+
+        //destroy the particle system when its duration is up, right
+        //it would play a second time.
+        Destroy(explosionEffect.gameObject); //, explosionEffect.duration
+        //destroy our game object
+        Destroy(gameObject);
 
     }
 
@@ -93,7 +123,6 @@ public abstract class BasePiece : EventTrigger
 
         //Add to list
         mHighlightedCells.Add(mCurrentCell.mBoard.mAllCells[currentX, currentY]);
-        
     }
 
     public virtual void CheckPathing()
@@ -121,7 +150,6 @@ public abstract class BasePiece : EventTrigger
         {
             cell.mOutlineImage.enabled = true;
         }
-
     }
 
     public void ClearCells()
@@ -157,6 +185,19 @@ public abstract class BasePiece : EventTrigger
 
     protected void ShowArrow()
     {
+        BasePiece currentpiece = mCurrentCell.mCurrentPiece;
+        if ((mColor == Color.black) && (currentpiece.type == "laser") && (currentpiece.direction == 2)) {
+            mCurrentCell.mRotationImageLeft.enabled = true;
+            return; }
+        if ((mColor == Color.black) && (currentpiece.type == "laser") && (currentpiece.direction == 1)) {
+            mCurrentCell.mRotationImageRight.enabled = true;
+            return; }
+        if ((mColor == Color.white) && (currentpiece.type == "laser") && (currentpiece.direction == 0)) {
+            mCurrentCell.mRotationImageLeft.enabled = true;
+            return; }
+        if ((mColor == Color.white) && (currentpiece.type == "laser") && (currentpiece.direction == 3)) {
+            mCurrentCell.mRotationImageRight.enabled = true;
+            return; }
         mCurrentCell.mRotationImageRight.enabled = true;
         mCurrentCell.mRotationImageLeft.enabled = true;
     }
@@ -172,7 +213,7 @@ public abstract class BasePiece : EventTrigger
         mCurrentCell.mCurrentPiece.transform.rotation = Quaternion.AngleAxis(90, Vector3.up);
     }
 
-    public void  LeftRotation()
+    public void LeftRotation()
     {
         mCurrentCell.mCurrentPiece.transform.rotation = Quaternion.AngleAxis(-90, Vector3.up);
     }
@@ -183,6 +224,7 @@ public abstract class BasePiece : EventTrigger
     {
         base.OnPointerClick(eventData);
 
+        // click 은 클릭되어 있는 상태인지를 나타내는 변수
         if (click == false)
         {
             for (int i = 0; i < 8; i++)
@@ -209,7 +251,6 @@ public abstract class BasePiece : EventTrigger
         {
             ClearCells();
             click = false;
-
         }
 
     }
@@ -245,7 +286,6 @@ public abstract class BasePiece : EventTrigger
     {
         base.OnEndDrag(eventData);
 
-        Destroy(canv);
         //return to original position
         if (!mTargetCell)
         {
